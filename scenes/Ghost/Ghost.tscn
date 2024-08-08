@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3x3hfhnhm86m"]
+
+[ext_resource type="Texture2D" uid="uid://dmtkcmkfrkl0y" path="res://assets/ghost/ghost.png" id="1_axkrn"]
+[ext_resource type="Script" path="res://scenes/Ghost/Ghost.cs" id="1_or6sf"]
+[ext_resource type="Texture2D" uid="uid://cehjkag0ugrsf" path="res://assets/ghost/ghost_walk.png" id="2_ij1q7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3scai"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_axkrn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ij1q7")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cj65o"]
+radius = 217.0
+height = 476.0
+
+[node name="Ghost" type="Area2D"]
+script = ExtResource("1_or6sf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3scai")
+animation = &"move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, -2)
+shape = SubResource("CapsuleShape2D_cj65o")
