@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://dua27ejmifmv2"]
+
+[ext_resource type="PackedScene" uid="uid://dt1linc8k4nnv" path="res://scenes/player/player.tscn" id="1_57f4k"]
+[ext_resource type="PackedScene" uid="uid://blsi0rjej8d06" path="res://scenes/RandomMap/RandomMap.tscn" id="1_xlols"]
+[ext_resource type="Shader" path="res://scenes/Main/Main.gdshader" id="2_ymd7a"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_w73p2"]
+frequency = 0.0009
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1xmby"]
+width = 1920
+height = 1080
+invert = true
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_w73p2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bvcyx"]
+shader = ExtResource("2_ymd7a")
+shader_parameter/density = 1.0
+shader_parameter/speed = Vector2(0.002, 0.001)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_1xmby")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0qasi"]
+frequency = 0.001
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u7ikl"]
+width = 1920
+height = 1080
+seamless = true
+seamless_blend_skirt = 0.16
+noise = SubResource("FastNoiseLite_0qasi")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m2tu7"]
+shader = ExtResource("2_ymd7a")
+shader_parameter/density = 0.25
+shader_parameter/speed = Vector2(0.007, 0.008)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_u7ikl")
+
+[node name="Main" type="Node2D"]
+
+[node name="RandomMap" parent="." instance=ExtResource("1_xlols")]
+
+[node name="Player" parent="." instance=ExtResource("1_57f4k")]
+slide_on_ceiling = false
+platform_wall_layers = 1
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-1.38777e-11, -266.667)
+scale = Vector2(6.66667, 6.66667)
+offset = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="Fog" type="ParallaxBackground" parent="."]
+layer = 2
+visible = false
+scale = Vector2(6, 6)
+transform = Transform2D(6, 0, 0, 6, 0, 0)
+follow_viewport_enabled = true
+follow_viewport_scale = 5.0
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Fog"]
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="ColorRect" type="ColorRect" parent="Fog/ParallaxLayer2"]
+material = SubResource("ShaderMaterial_bvcyx")
+offset_right = 320.0
+offset_bottom = 189.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Fog"]
+scale = Vector2(6, 6)
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="ColorRect" type="ColorRect" parent="Fog/ParallaxLayer"]
+material = SubResource("ShaderMaterial_m2tu7")
+offset_right = 40.0
+offset_bottom = 40.0

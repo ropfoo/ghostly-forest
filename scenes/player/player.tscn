@@ -1,14 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dt1linc8k4nnv"]
+[gd_scene load_steps=5 format=3 uid="uid://dt1linc8k4nnv"]
 
 [ext_resource type="Script" path="res://scenes/player/Player.cs" id="1_e2ygb"]
-[ext_resource type="Texture2D" uid="uid://dmtkcmkfrkl0y" path="res://assets/ghost/ghost.png" id="1_sy86h"]
-[ext_resource type="Texture2D" uid="uid://cehjkag0ugrsf" path="res://assets/ghost/ghost_walk.png" id="2_o8h0m"]
+[ext_resource type="Texture2D" uid="uid://hnhugkyp4xp3" path="res://icon.svg" id="2_5b436"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iihdp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_sy86h")
+"texture": ExtResource("2_5b436")
 }],
 "loop": true,
 "name": &"idle",
@@ -16,7 +15,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_o8h0m")
+"texture": ExtResource("2_5b436")
 }],
 "loop": true,
 "name": &"walk",
@@ -24,17 +23,18 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_htqg0"]
-radius = 200.0
-height = 488.0
+radius = 74.6665
+height = 149.333
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(2.08165e-12, 40)
 scale = Vector2(0.15, 0.15)
 script = ExtResource("1_e2ygb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_iihdp")
-animation = &"idle"
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(2.08165e-12, 2.08165e-12)
 shape = SubResource("CapsuleShape2D_htqg0")
