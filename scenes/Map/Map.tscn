@@ -1,13 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://blsi0rjej8d06"]
 
-[ext_resource type="Script" path="res://scenes/Map/Map.cs" id="1_j05cl"]
+[ext_resource type="Script" path="res://scenes/Map/Map.gd" id="1_q5dta"]
 [ext_resource type="Texture2D" uid="uid://c42c2axrtsiqe" path="res://scenes/Map/tilesheet.png" id="2_cul7j"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_hgsk6"]
-frequency = 0.0233
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_36j6q"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kmilu"]
-noise = SubResource("FastNoiseLite_hgsk6")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sj12h"]
+noise = SubResource("FastNoiseLite_36j6q")
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cdgkv"]
 
@@ -61,8 +60,8 @@ terrain_set_0/terrain_2/color = Color(0.960784, 0.203922, 0.835294, 1)
 sources/2 = SubResource("TileSetAtlasSource_0lg8j")
 
 [node name="Map" type="Node2D"]
-script = ExtResource("1_j05cl")
-noiseTexture2D = SubResource("NoiseTexture2D_kmilu")
+script = ExtResource("1_q5dta")
+noise_texture_2d = SubResource("NoiseTexture2D_sj12h")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_wkmcx")

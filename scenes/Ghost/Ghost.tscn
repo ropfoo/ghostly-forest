@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c3x3hfhnhm86m"]
 
 [ext_resource type="Texture2D" uid="uid://dmtkcmkfrkl0y" path="res://assets/ghost/ghost.png" id="1_axkrn"]
-[ext_resource type="Script" path="res://scenes/Ghost/Ghost.cs" id="1_or6sf"]
+[ext_resource type="Script" path="res://scenes/Ghost/Ghost.gd" id="1_t6xbl"]
 [ext_resource type="Texture2D" uid="uid://cehjkag0ugrsf" path="res://assets/ghost/ghost_walk.png" id="2_ij1q7"]
 
 [sub_resource type="Shader" id="Shader_t8bcw"]
@@ -49,7 +49,7 @@ height = 266.667
 
 [node name="Ghost" type="Area2D"]
 scale = Vector2(0.05, 0.05)
-script = ExtResource("1_or6sf")
+script = ExtResource("1_t6xbl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visibility_layer = 4
@@ -68,3 +68,6 @@ energy = 1.95
 texture = ExtResource("2_ij1q7")
 offset = Vector2(-14.3, 9.75)
 texture_scale = 0.15
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
