@@ -27,11 +27,13 @@ radius = 74.6665
 height = 149.333
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(2.08165e-12, 40)
+position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(0.15, 0.15)
+up_direction = Vector2(2.94434e-12, 1)
 script = ExtResource("1_e2ygb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
 sprite_frames = SubResource("SpriteFrames_iihdp")
 animation = &"walk"
 

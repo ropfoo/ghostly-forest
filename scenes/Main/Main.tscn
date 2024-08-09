@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dua27ejmifmv2"]
+[gd_scene load_steps=11 format=3 uid="uid://dua27ejmifmv2"]
 
+[ext_resource type="PackedScene" uid="uid://blsi0rjej8d06" path="res://scenes/Map/Map.tscn" id="1_7u6sq"]
 [ext_resource type="PackedScene" uid="uid://dt1linc8k4nnv" path="res://scenes/player/player.tscn" id="1_57f4k"]
-[ext_resource type="PackedScene" uid="uid://blsi0rjej8d06" path="res://scenes/RandomMap/RandomMap.tscn" id="1_xlols"]
+[ext_resource type="PackedScene" uid="uid://c3x3hfhnhm86m" path="res://scenes/Ghost/Ghost.tscn" id="2_cusyc"]
 [ext_resource type="Shader" path="res://scenes/Main/Main.gdshader" id="2_ymd7a"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_w73p2"]
@@ -39,16 +40,25 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_u7ikl")
 
 [node name="Main" type="Node2D"]
 
-[node name="RandomMap" parent="." instance=ExtResource("1_xlols")]
+[node name="Map" parent="." instance=ExtResource("1_7u6sq")]
+position = Vector2(-960, -960)
+
+[node name="Ghost" parent="." instance=ExtResource("2_cusyc")]
+
+[node name="Ghost2" parent="." instance=ExtResource("2_cusyc")]
+position = Vector2(178, -100)
 
 [node name="Player" parent="." instance=ExtResource("1_57f4k")]
+position = Vector2(129, 31)
 slide_on_ceiling = false
+platform_floor_layers = 4294967041
 platform_wall_layers = 1
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-1.38777e-11, -266.667)
 scale = Vector2(6.66667, 6.66667)
 offset = Vector2(2.08165e-12, 2.08165e-12)
+zoom = Vector2(1.5, 1.5)
 
 [node name="Fog" type="ParallaxBackground" parent="."]
 layer = 2
@@ -56,15 +66,16 @@ visible = false
 scale = Vector2(6, 6)
 transform = Transform2D(6, 0, 0, 6, 0, 0)
 follow_viewport_enabled = true
-follow_viewport_scale = 5.0
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="Fog"]
-motion_mirroring = Vector2(1920, 1080)
+motion_mirroring = Vector2(319.99, 2.08165e-12)
 
 [node name="ColorRect" type="ColorRect" parent="Fog/ParallaxLayer2"]
 material = SubResource("ShaderMaterial_bvcyx")
-offset_right = 320.0
-offset_bottom = 189.0
+offset_left = -97.8333
+offset_top = -102.333
+offset_right = 222.167
+offset_bottom = 86.6667
 metadata/_edit_use_anchors_ = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Fog"]
@@ -72,6 +83,13 @@ scale = Vector2(6, 6)
 motion_mirroring = Vector2(1920, 1080)
 
 [node name="ColorRect" type="ColorRect" parent="Fog/ParallaxLayer"]
+visible = false
 material = SubResource("ShaderMaterial_m2tu7")
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+light_mask = 3
+visibility_layer = 3
+color = Color(0.678599, 0.584525, 0.802116, 1)

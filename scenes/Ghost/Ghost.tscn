@@ -1,8 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3x3hfhnhm86m"]
+[gd_scene load_steps=8 format=3 uid="uid://c3x3hfhnhm86m"]
 
 [ext_resource type="Texture2D" uid="uid://dmtkcmkfrkl0y" path="res://assets/ghost/ghost.png" id="1_axkrn"]
 [ext_resource type="Script" path="res://scenes/Ghost/Ghost.cs" id="1_or6sf"]
 [ext_resource type="Texture2D" uid="uid://cehjkag0ugrsf" path="res://assets/ghost/ghost_walk.png" id="2_ij1q7"]
+
+[sub_resource type="Shader" id="Shader_t8bcw"]
+code = "shader_type canvas_item;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	// Called for every pixel the material is visible on.
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rxxsc"]
+shader = SubResource("Shader_t8bcw")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3scai"]
 animations = [{
@@ -24,16 +44,27 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cj65o"]
-radius = 217.0
-height = 476.0
+radius = 126.667
+height = 266.667
 
 [node name="Ghost" type="Area2D"]
+scale = Vector2(0.05, 0.05)
 script = ExtResource("1_or6sf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visibility_layer = 4
+material = SubResource("ShaderMaterial_rxxsc")
 sprite_frames = SubResource("SpriteFrames_3scai")
 animation = &"move"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(10, -2)
+position = Vector2(0, 66.6667)
 shape = SubResource("CapsuleShape2D_cj65o")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(86.6667, -60)
+scale = Vector2(7.02083, 7.02083)
+energy = 1.95
+texture = ExtResource("2_ij1q7")
+offset = Vector2(-14.3, 9.75)
+texture_scale = 0.15

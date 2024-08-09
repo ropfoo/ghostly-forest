@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://blsi0rjej8d06"]
+
+[ext_resource type="Script" path="res://scenes/Map/Map.cs" id="1_j05cl"]
+[ext_resource type="Texture2D" uid="uid://c42c2axrtsiqe" path="res://scenes/Map/tilesheet.png" id="2_cul7j"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hgsk6"]
+frequency = 0.0233
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kmilu"]
+noise = SubResource("FastNoiseLite_hgsk6")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cdgkv"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0lg8j"]
+texture = ExtResource("2_cul7j")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:3/0 = 0
+1:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:3/0/physics_layer_0/angular_velocity = 0.0
+0:3/0 = 0
+0:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:3/0/physics_layer_0/angular_velocity = 0.0
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+13:3/size_in_atlas = Vector2i(1, 2)
+13:3/0 = 0
+13:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+13:3/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_wkmcx"]
+tile_shape = 3
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_cdgkv")
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Lava"
+terrain_set_0/terrain_0/color = Color(0.633859, 0.769785, 0.949067, 1)
+terrain_set_0/terrain_1/name = "Water"
+terrain_set_0/terrain_1/color = Color(0.266293, 0.768142, 0.591595, 1)
+terrain_set_0/terrain_2/name = "Grass"
+terrain_set_0/terrain_2/color = Color(0.960784, 0.203922, 0.835294, 1)
+sources/2 = SubResource("TileSetAtlasSource_0lg8j")
+
+[node name="Map" type="Node2D"]
+script = ExtResource("1_j05cl")
+noiseTexture2D = SubResource("NoiseTexture2D_kmilu")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_wkmcx")
+rendering_quadrant_size = 64
+collision_visibility_mode = 1
+format = 2
