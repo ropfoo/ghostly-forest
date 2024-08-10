@@ -38,6 +38,7 @@ func move_to_destination(delta):
 	if position.distance_to(destination) > acceptable_distance:
 		var target: Vector2 = (destination - position).normalized()
 		var velocity: Vector2 = target * speed
+		animated_sprite_2d.flip_h = velocity.x < 0
 		position += velocity * delta
 
 func _on_area_entered(area):

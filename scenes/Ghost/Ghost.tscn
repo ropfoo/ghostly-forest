@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3x3hfhnhm86m"]
+[gd_scene load_steps=9 format=3 uid="uid://c3x3hfhnhm86m"]
 
 [ext_resource type="Texture2D" uid="uid://dmtkcmkfrkl0y" path="res://assets/ghost/ghost.png" id="1_axkrn"]
 [ext_resource type="Script" path="res://scenes/Ghost/Ghost.gd" id="1_t6xbl"]
-[ext_resource type="Texture2D" uid="uid://cehjkag0ugrsf" path="res://assets/ghost/ghost_walk.png" id="2_ij1q7"]
 
 [sub_resource type="Shader" id="Shader_t8bcw"]
 code = "shader_type canvas_item;
@@ -36,7 +35,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_ij1q7")
+"texture": ExtResource("1_axkrn")
 }],
 "loop": true,
 "name": &"move",
@@ -44,11 +43,21 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cj65o"]
-radius = 96.9906
-height = 382.641
+radius = 44.2757
+height = 199.766
+
+[sub_resource type="Gradient" id="Gradient_vft1k"]
+offsets = PackedFloat32Array(0.0769231, 0.769231, 1)
+colors = PackedColorArray(0.635294, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e55jp"]
+gradient = SubResource("Gradient_vft1k")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 1)
 
 [node name="Ghost" type="Area2D"]
-scale = Vector2(0.05, 0.05)
+scale = Vector2(0.2, 0.2)
 script = ExtResource("1_t6xbl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -58,16 +67,15 @@ sprite_frames = SubResource("SpriteFrames_3scai")
 animation = &"move"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.08165e-12, 2.08165e-12)
-rotation = 0.755728
+position = Vector2(-9.08, 2.08165e-12)
 scale = Vector2(1.89901, 1.40164)
 shape = SubResource("CapsuleShape2D_cj65o")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(86.6667, -60)
-scale = Vector2(7.02083, 7.02083)
-energy = 1.95
-texture = ExtResource("2_ij1q7")
+position = Vector2(810, -544.105)
+scale = Vector2(56.863, 52.3444)
+energy = 0.35
+texture = SubResource("GradientTexture2D_e55jp")
 offset = Vector2(-14.3, 9.75)
 texture_scale = 0.15
 
