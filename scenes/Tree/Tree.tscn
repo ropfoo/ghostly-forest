@@ -1,20 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgsfu8jgqdan"]
+[gd_scene load_steps=5 format=3 uid="uid://bgsfu8jgqdan"]
 
-[ext_resource type="Texture2D" uid="uid://ch2yws65cv1hm" path="res://scenes/foliage/trees/tree_01/tree_01.png" id="2_6psop"]
+[ext_resource type="Texture2D" uid="uid://ch2yws65cv1hm" path="res://assets/tree/tree_no_leaves.png" id="2_8qlgr"]
 [ext_resource type="Script" path="res://scenes/Tree/Tree.gd" id="2_j2ylp"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_itica"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8qlgr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtnan"]
-size = Vector2(42, 400)
+size = Vector2(31.9875, 108)
 
-[node name="Tree" type="Sprite2D"]
+[node name="Tree" type="Area2D"]
 position = Vector2(-1, 0)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_6psop")
-offset = Vector2(2.08165e-12, -200)
-
-[node name="Sprite2D" type="Area2D" parent="."]
+scale = Vector2(0.45, 0.45)
 script = ExtResource("2_j2ylp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D"]
-position = Vector2(1, -200)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.08165e-12, -200)
+sprite_frames = SubResource("SpriteFrames_itica")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5.2857, -54)
+rotation = 3.14159
+scale = Vector2(0.920004, -1)
 shape = SubResource("RectangleShape2D_vtnan")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_right = 4.0
+offset_bottom = 27.0
+max_value = 1.0

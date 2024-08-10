@@ -1,4 +1,4 @@
-extends Area2D
+class_name  Ghost extends Area2D
 
 signal hit
 
@@ -8,15 +8,13 @@ var destination: Vector2 = Vector2.ZERO
 var is_selected: bool = false
 var is_mouse_enter: bool = false
 
-# Reference to the child nodes
+# reference to child nodes
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var point_light_2d: PointLight2D = $PointLight2D
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if destination.length() > 0:
 		move_to_destination(delta)
@@ -40,13 +38,16 @@ func move_to_destination(delta):
 	if position.distance_to(destination) > acceptable_distance:
 		var target: Vector2 = (destination - position).normalized()
 		var velocity: Vector2 = target * speed
-		# animated_sprite_2d.flip_h = velocity.x < 0
 		position += velocity * delta
 
 func _on_area_entered(area):
-	print("hi tree")
-	if area.has_method("accept_ghost"):
-		if area.accept_ghost():
-			# queue_free()
-			$AnimatedSprite2D.animation = "idle"
-		print("cool")			
+	if area.has_method("accept_ghost") && is_near_destination():
+		print("hi tree")
+		if area.accept_ghost(self):
+			hide()
+			is_selected = false
+			destination = Vector2.ZERO
+
+# check if ghost is near its destination
+func is_near_destination() -> bool:
+	return destination.distance_to(position) <= 64 # <- buffer

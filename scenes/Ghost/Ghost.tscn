@@ -44,8 +44,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cj65o"]
-radius = 126.667
-height = 266.667
+radius = 96.9906
+height = 382.641
 
 [node name="Ghost" type="Area2D"]
 scale = Vector2(0.05, 0.05)
@@ -58,7 +58,9 @@ sprite_frames = SubResource("SpriteFrames_3scai")
 animation = &"move"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 66.6667)
+position = Vector2(2.08165e-12, 2.08165e-12)
+rotation = 0.755728
+scale = Vector2(1.89901, 1.40164)
 shape = SubResource("CapsuleShape2D_cj65o")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
