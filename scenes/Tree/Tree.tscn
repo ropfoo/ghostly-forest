@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bgsfu8jgqdan"]
+[gd_scene load_steps=8 format=3 uid="uid://bgsfu8jgqdan"]
 
 [ext_resource type="Texture2D" uid="uid://ch2yws65cv1hm" path="res://assets/tree/tree_no_leaves.png" id="2_8qlgr"]
 [ext_resource type="Script" path="res://scenes/Tree/Tree.gd" id="2_j2ylp"]
@@ -24,7 +24,16 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtnan"]
-size = Vector2(31.9875, 108)
+size = Vector2(81.5214, 85)
+
+[sub_resource type="Gradient" id="Gradient_c4548"]
+offsets = PackedFloat32Array(0.162393, 0.763533, 1)
+colors = PackedColorArray(0.635294, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_q788x"]
+gradient = SubResource("Gradient_c4548")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Tree" type="Area2D"]
 position = Vector2(-1, 0)
@@ -37,7 +46,7 @@ sprite_frames = SubResource("SpriteFrames_itica")
 animation = &"no_health"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-5.2857, -54)
+position = Vector2(-12.5, -42.5)
 rotation = 3.14159
 scale = Vector2(0.920004, -1)
 shape = SubResource("RectangleShape2D_vtnan")
@@ -48,3 +57,9 @@ shape = SubResource("RectangleShape2D_vtnan")
 offset_right = 4.0
 offset_bottom = 27.0
 max_value = 1.0
+
+[node name="GhostLight" type="PointLight2D" parent="."]
+position = Vector2(-2.5, -145)
+scale = Vector2(10, 10)
+energy = 0.3
+texture = SubResource("GradientTexture2D_q788x")

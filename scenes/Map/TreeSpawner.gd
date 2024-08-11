@@ -9,18 +9,19 @@ func _init(spawn_node: Node, new_tile_map: TileMap):
 	node = spawn_node
 
 func create_tree(tile_position: Vector2):
-	var tree_instance: Area2D = tree_scene.instantiate()
+	var tree_instance: ManaTree = tree_scene.instantiate()
 	tree_instance.position = tile_map.map_to_local(tile_position)
 	tree_instance.visibility_layer = 2
 	node.add_child(tree_instance)
 
 func spawn_trees_on_tiles(tiles: Array[Vector2i]):
-	var random = RandomNumberGenerator.new()
-	
 	var created_trees: Array[Vector2] = []
-	var radius = Vector2(3, 5)  # Minimum distance between trees
+	var radius = Vector2(4, 5)  # Minimum distance between trees
 
 	for tile: Vector2 in tiles:
+		var should_spawn: bool = randi() % 2
+		if !should_spawn: continue
+
 		var can_create = true
 
 		# Check if the current tile is far enough from all existing trees
@@ -31,5 +32,6 @@ func spawn_trees_on_tiles(tiles: Array[Vector2i]):
 
 		# If the current tile is valid, create the tree and add it to the list
 		if can_create:
+			
 			create_tree(tile)
 			created_trees.append(tile)
