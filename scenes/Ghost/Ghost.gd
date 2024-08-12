@@ -27,6 +27,14 @@ func _input(_event):
 		if is_selected:
 			destination = get_global_mouse_position()
 
+func select():
+	is_selected = true
+	animated_sprite_2d.scale = Vector2(2,2)
+
+func deselect():
+	is_selected = true
+	animated_sprite_2d.scale = Vector2(1,1)
+
 func _mouse_enter():
 	is_mouse_enter = true
 
