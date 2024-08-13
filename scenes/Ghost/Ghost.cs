@@ -1,7 +1,6 @@
 using Godot;
-using System;
 
-public partial class Ghost : Area2D
+public partial class Ghost : Area2D, IUnit
 {
 	[Export]
 	public int Speed { get; set; } = 100;
@@ -41,6 +40,11 @@ public partial class Ghost : Area2D
 		}
 	}
 
+	public Vector2 GetPosition()
+	{
+		return GlobalPosition;
+	}
+
 	public void Select()
 	{
 		IsSelected = true;
@@ -63,7 +67,7 @@ public partial class Ghost : Area2D
 		isMouseEnter = false;
 	}
 
-	private void MoveToDestination(double delta)
+	public void MoveToDestination(double delta)
 	{
 		var acceptableDistance = 5;
 		if (Position.DistanceTo(Destination) > acceptableDistance)
@@ -75,17 +79,28 @@ public partial class Ghost : Area2D
 		}
 	}
 
-	private bool IsNearDestination()
+	public bool IsNearDestination()
 	{
 		return Destination.DistanceTo(Position) <= 64;
 	}
 
+	public UnitType GetUnitType()
+	{
+		return UnitType.Ghost;
+	}
+
+	public void CheckIntersect(IUnit unit)
+	{
+		if (unit.GetUnitType() == UnitType.Ghost)
+		{
+			Position = new Vector2(Position.X + 100, Position.Y + 100);
+		}
+	}
+
 	private void _on_area_entered(Area2D area)
 	{
-		GD.Print("hi area");
 		if (area.HasMethod("AcceptGhost") && IsNearDestination())
 		{
-			GD.Print("hi tree");
 			if ((bool)area.Call("AcceptGhost", this))
 			{
 				Hide();
@@ -93,6 +108,12 @@ public partial class Ghost : Area2D
 				Destination = Vector2.Zero;
 			}
 		}
+
+		if (area is Ghost)
+		{
+			Destination = Position;
+		}
+
 	}
 }
 

@@ -1,9 +1,10 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 public partial class Main : Node2D
 {
+	List<IUnit> selectedUnits = new List<IUnit>();
+
 	private ColorRect selectionRect;
 	private Vector2 selectionStart;
 	private bool isSelecting = false;
@@ -22,14 +23,7 @@ public partial class Main : Node2D
 			{
 				if (mouseEvent.Pressed)
 				{
-					// Deselect all units
-					foreach (var child in GetChildren())
-					{
-						if (child is Ghost ghost)
-						{
-							ghost.Deselect();
-						}
-					}
+					DeselectUnits();
 
 					// Start drawing the selection rectangle
 					isSelecting = true;
@@ -37,6 +31,7 @@ public partial class Main : Node2D
 					selectionRect.Visible = true;
 					selectionRect.Position = selectionStart;
 					selectionRect.Size = Vector2.Zero;
+					SelectUnitOnClick();
 				}
 				else
 				{
@@ -66,26 +61,49 @@ public partial class Main : Node2D
 		}
 	}
 
+	private void SelectUnitOnClick()
+	{
+		foreach (var child in GetChildren())
+		{
+			if (child is IUnit unit)
+			{
+				if (unit.GetPosition().DistanceTo(GetGlobalMousePosition()) < 20)
+				{
+					selectedUnits.Add(unit);
+					unit.Select();
+					GD.Print($"Selected Units: {selectedUnits.Count}");
+				}
+			}
+		}
+	}
+
 	private void SelectUnitsInRectangle()
 	{
-		List<Ghost> selectedUnits = new List<Ghost>();
 		Rect2 selectionBox = new Rect2(selectionRect.Position, selectionRect.Size);
 
 		// Iterate through all children to check if they are inside the selection rectangle
 		foreach (var child in GetChildren())
 		{
-			if (child is Ghost ghost)
+			if (child is IUnit unit)
 			{
-				Vector2 unitPosition = ghost.GlobalPosition;
+				Vector2 unitPosition = unit.GetPosition();
 				if (selectionBox.HasPoint(unitPosition))
 				{
-					selectedUnits.Add(ghost);
-					ghost.Select();
-					ghost.Modulate = Colors.White;  // Highlight selected units
+					selectedUnits.Add(unit);
+					unit.Select();
 				}
 			}
 		}
 
 		GD.Print($"Selected Units: {selectedUnits.Count}");
+	}
+
+	private void DeselectUnits()
+	{
+		foreach (var unit in selectedUnits)
+		{
+			unit.Deselect();
+		}
+		selectedUnits = new List<IUnit>();
 	}
 }
