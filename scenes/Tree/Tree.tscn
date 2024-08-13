@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bgsfu8jgqdan"]
 
+[ext_resource type="Script" path="res://scenes/Tree/ManaTree.cs" id="1_wgm4r"]
 [ext_resource type="Texture2D" uid="uid://ch2yws65cv1hm" path="res://assets/tree/tree_no_leaves.png" id="2_8qlgr"]
-[ext_resource type="Script" path="res://scenes/Tree/Tree.gd" id="2_j2ylp"]
 [ext_resource type="Texture2D" uid="uid://bfh7ljxeq4qd8" path="res://assets/tree/tree_leaves_10.png" id="3_e4sxh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_itica"]
@@ -38,7 +38,7 @@ fill_from = Vector2(0.5, 0.5)
 [node name="Tree" type="Area2D"]
 position = Vector2(-1, 0)
 scale = Vector2(0.4, 0.4)
-script = ExtResource("2_j2ylp")
+script = ExtResource("1_wgm4r")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(2.08165e-12, -200)
