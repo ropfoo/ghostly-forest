@@ -5,13 +5,19 @@ public partial class Main : Node2D
 {
 	List<IUnit> selectedUnits = new List<IUnit>();
 
+	private double mana;
+
 	private ColorRect selectionRect;
+	private ResourcePanel resourcePanel;
+
 	private Vector2 selectionStart;
 	private bool isSelecting = false;
 
 	public override void _Ready()
 	{
 		selectionRect = GetNode<ColorRect>("SelectionRect");
+		resourcePanel = GetNode<ResourcePanel>("GUI/ResourcePanel");
+		resourcePanel.SetManaCount(10);
 		selectionRect.Visible = false;
 	}
 
@@ -106,4 +112,12 @@ public partial class Main : Node2D
 		}
 		selectedUnits = new List<IUnit>();
 	}
+
+	public void AddToManaCount(double newMana)
+	{
+		mana += newMana;
+		resourcePanel.SetManaCount(mana);
+		GD.Print(mana);
+	}
 }
+
