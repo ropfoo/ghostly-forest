@@ -11,7 +11,7 @@ public partial class ManaTree : Area2D
 	private bool isMouseEnter = false;
 
 	private GhostContainer ghostContainer;
-	private float health = 0.1f;
+	public float Health = 0.1f;
 
 	private Main main;
 
@@ -29,7 +29,7 @@ public partial class ManaTree : Area2D
 		ghostLight.Visible = false;
 		ghostContainer = new GhostContainer(ghostLight);
 
-		healthBar.Value = health;
+		healthBar.Value = Health;
 		PlayAnimation();
 
 		timer.Timeout += OnTimerTimeout;
@@ -79,20 +79,20 @@ public partial class ManaTree : Area2D
 		if (ghostContainer.Ghost == null) return;
 
 		main.AddToManaCount(1);
-		health += amount;
-		healthBar.Value = health;
+		Health += amount;
+		healthBar.Value = Health;
 		PlayAnimation();
 	}
 
 	private void PlayAnimation()
 	{
-		if (health <= 0.1f)
+		if (Health <= 0.1f)
 		{
 			sprite.Animation = "no_health";
 			return;
 		}
 
-		if (health >= 0.9f)
+		if (Health >= 0.9f)
 		{
 			sprite.Animation = "full_health";
 			return;

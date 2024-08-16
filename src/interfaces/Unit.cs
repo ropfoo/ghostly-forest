@@ -13,8 +13,6 @@ public interface IUnit
 
     void Deselect();
 
-    void MoveToDestination(double delta);
-
     bool IsNearDestination();
 
     UnitType GetUnitType();

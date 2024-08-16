@@ -8,7 +8,7 @@ public partial class Map : Node2D
 	[Export]
 	public int SourceId = 2;
 
-	private TileMap tileMap;
+	public TileMap TileMap;
 	private Noise noise;
 	private Atlas atlas;
 	private TreeSpawner treeSpawner;
@@ -17,8 +17,8 @@ public partial class Map : Node2D
 	{
 		atlas = new Atlas();
 		noise = NoiseTexture2D.Noise;
-		tileMap = GetNode<TileMap>("TileMap");
-		treeSpawner = new TreeSpawner(this, tileMap);
+		TileMap = GetNode<TileMap>("TileMap");
+		treeSpawner = new TreeSpawner(this, TileMap);
 		GenerateWorld(30, 30);
 	}
 
@@ -66,7 +66,7 @@ public partial class Map : Node2D
 			}
 		}
 
-		var treeTiles = tileMap.GetUsedCellsById(0, SourceId, atlas.GrassAtlas);
+		var treeTiles = TileMap.GetUsedCellsById(0, SourceId, atlas.GrassAtlas);
 		treeSpawner.SpawnTreesOnTiles(treeTiles);
 
 		GD.Print("Done generating");
@@ -74,6 +74,6 @@ public partial class Map : Node2D
 
 	private void SetTileCell(Vector2I coords, Vector2I atlasCoords, int layer = 0)
 	{
-		tileMap.SetCell(layer, coords, SourceId, atlasCoords);
+		TileMap.SetCell(layer, coords, SourceId, atlasCoords);
 	}
 }

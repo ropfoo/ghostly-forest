@@ -1,21 +1,16 @@
 using Godot;
 
-public partial class Ghost : Area2D, IUnit
+public partial class Ghost : Moveable, IUnit
 {
-	[Export]
-	public int Speed { get; set; } = 100;
-
-	public Vector2 Destination = Vector2.Zero;
 	public bool IsSelected = false;
 	private bool isMouseEnter = false;
 
 	// References to child nodes
-	private AnimatedSprite2D animatedSprite2D;
 	private PointLight2D pointLight2D;
 
 	public override void _Ready()
 	{
-		animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		Sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		pointLight2D = GetNode<PointLight2D>("PointLight2D");
 	}
 
@@ -48,13 +43,13 @@ public partial class Ghost : Area2D, IUnit
 	public void Select()
 	{
 		IsSelected = true;
-		animatedSprite2D.Scale = new Vector2(2, 2);
+		Sprite.Scale = new Vector2(2, 2);
 	}
 
 	public void Deselect()
 	{
 		IsSelected = false;
-		animatedSprite2D.Scale = new Vector2(1, 1);
+		Sprite.Scale = new Vector2(1, 1);
 	}
 
 	public override void _MouseEnter()
@@ -67,17 +62,6 @@ public partial class Ghost : Area2D, IUnit
 		isMouseEnter = false;
 	}
 
-	public void MoveToDestination(double delta)
-	{
-		var acceptableDistance = 5;
-		if (Position.DistanceTo(Destination) > acceptableDistance)
-		{
-			Vector2 target = (Destination - Position).Normalized();
-			Vector2 velocity = target * Speed;
-			animatedSprite2D.FlipH = velocity.X < 0;
-			Position += velocity * (float)delta;
-		}
-	}
 
 	public bool IsNearDestination()
 	{

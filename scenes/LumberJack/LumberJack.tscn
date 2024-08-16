@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dv0yfr0gsmexn"]
+
+[ext_resource type="Script" path="res://scenes/LumberJack/LumberJack.cs" id="1_yxprg"]
+[ext_resource type="Texture2D" uid="uid://hnhugkyp4xp3" path="res://icon.svg" id="2_gns0g"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_05qec"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gns0g")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ewbxn"]
+
+[node name="LumberJack" type="Area2D"]
+script = ExtResource("1_yxprg")
+
+[node name="LumberJackSprite" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.886275, 0.258824, 0.392157, 0.862745)
+sprite_frames = SubResource("SpriteFrames_05qec")
+animation = &"run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ewbxn")

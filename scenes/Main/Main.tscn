@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dua27ejmifmv2"]
+[gd_scene load_steps=14 format=3 uid="uid://dua27ejmifmv2"]
 
 [ext_resource type="PackedScene" uid="uid://blsi0rjej8d06" path="res://scenes/Map/Map.tscn" id="1_7u6sq"]
 [ext_resource type="PackedScene" uid="uid://dt1linc8k4nnv" path="res://scenes/player/player.tscn" id="1_57f4k"]
 [ext_resource type="Script" path="res://scenes/Main/Main.cs" id="1_eet6h"]
 [ext_resource type="PackedScene" uid="uid://c3x3hfhnhm86m" path="res://scenes/Ghost/Ghost.tscn" id="2_cusyc"]
 [ext_resource type="Shader" path="res://scenes/Main/Main.gdshader" id="2_ymd7a"]
+[ext_resource type="PackedScene" uid="uid://dv0yfr0gsmexn" path="res://scenes/LumberJack/LumberJack.tscn" id="4_0gs4n"]
 [ext_resource type="PackedScene" uid="uid://cw30paxsqsnl1" path="res://scenes/GUI/ResourcePanel/ResourcePanel.tscn" id="6_obpcc"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_w73p2"]
@@ -44,7 +45,6 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_u7ikl")
 script = ExtResource("1_eet6h")
 
 [node name="Map" parent="." instance=ExtResource("1_7u6sq")]
-position = Vector2(-960, -960)
 
 [node name="SelectionRect" type="ColorRect" parent="."]
 offset_right = 40.0
@@ -53,6 +53,10 @@ color = Color(0, 0.788235, 0.662745, 0.686275)
 metadata/_edit_use_anchors_ = true
 
 [node name="Ghost" parent="." instance=ExtResource("2_cusyc")]
+
+[node name="LumberJack" parent="." instance=ExtResource("4_0gs4n")]
+position = Vector2(-265, -315)
+scale = Vector2(0.15, 0.15)
 
 [node name="Ghost2" parent="." instance=ExtResource("2_cusyc")]
 position = Vector2(178, -100)
