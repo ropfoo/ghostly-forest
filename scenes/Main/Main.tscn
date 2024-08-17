@@ -55,8 +55,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Ghost" parent="." instance=ExtResource("2_cusyc")]
 
 [node name="LumberJack" parent="." instance=ExtResource("4_0gs4n")]
-position = Vector2(-265, -315)
-scale = Vector2(0.15, 0.15)
+position = Vector2(485, 18)
 
 [node name="Ghost2" parent="." instance=ExtResource("2_cusyc")]
 position = Vector2(178, -100)

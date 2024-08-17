@@ -63,10 +63,6 @@ public partial class Ghost : Moveable, IUnit
 	}
 
 
-	public bool IsNearDestination()
-	{
-		return Destination.DistanceTo(Position) <= 64;
-	}
 
 	public UnitType GetUnitType()
 	{

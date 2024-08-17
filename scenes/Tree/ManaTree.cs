@@ -74,6 +74,20 @@ public partial class ManaTree : Area2D
 		return ghostContainer.SetGhost(incomingGhost);
 	}
 
+	public bool TakeDamage(float damage)
+	{
+		GD.Print("take some damage: ", damage);
+		if (Health <= 0)
+		{
+			QueueFree();
+			return false;
+		}
+		Health -= damage;
+		healthBar.Value = Health;
+		PlayAnimation();
+		return true;
+	}
+
 	private void Heal(float amount)
 	{
 		if (ghostContainer.Ghost == null) return;
