@@ -21,16 +21,17 @@ public partial class Moveable : Area2D
         return false;
     }
 
-    public bool IsInVision(Vector2 obstacle)
-    {
-        return
+    public bool IsInVision(Vector2 obstacle) =>
             Math.Abs(Position.X - obstacle.X) < Vision.X &&
             Math.Abs(Position.Y - obstacle.Y) < Vision.Y;
-    }
 
+    public bool IsNearDestination() => Destination.DistanceTo(Position) <= 64;
 
-    public bool IsNearDestination()
+    public void MoveToRandomPlaceInVision()
     {
-        return Destination.DistanceTo(Position) <= 64;
+        Random random = new Random();
+        int randomX = random.Next((int)(Position.X - Vision.X), (int)(Position.X + Vision.X));
+        int randomY = random.Next((int)(Position.Y - Vision.Y), (int)(Position.Y + Vision.Y));
+        Destination = new Vector2(randomX, randomY);
     }
 }
